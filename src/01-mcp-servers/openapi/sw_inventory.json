@@ -1,0 +1,145 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "InventoryAPI",
+        "description": "Ecommerce API for retrieving inventory about products and their availability in specific locations.",
+        "version": "2.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://l66ctpb6-8000.euw.devtunnels.ms"
+        }
+    ],
+    "paths": {
+        "/get_closest_inventory_location/{customer_name}": {
+            "get": {
+                "summary": "Get Closest Inventory Location",
+                "description": "Get closest inventory location based on customer name",
+                "operationId": "get_closest_inventory_location",
+                "parameters": [
+                    {
+                        "name": "customer_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Customer Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string",
+                                    "title": "Response Get Closest Inventory Location"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/inventory/{product_id}": {
+            "get": {
+                "summary": "Get Inventory By Product Id",
+                "description": "Get available inventory by product ID",
+                "operationId": "get_inventory_by_product_id",
+                "parameters": [
+                    {
+                        "name": "product_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Product Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ProductInventory"
+                                    },
+                                    "title": "Response Get Inventory By Product Id"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Message": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "title": "Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "message"
+                ],
+                "title": "Message"
+            },
+            "ProductInventory": {
+                "properties": {
+                    "product_id": {
+                        "type": "string",
+                        "title": "Product Id"
+                    },
+                    "product_name": {
+                        "type": "string",
+                        "title": "Product Name"
+                    },
+                    "volume": {
+                        "type": "integer",
+                        "title": "Volume"
+                    },
+                    "location": {
+                        "type": "string",
+                        "title": "Location"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "product_id",
+                    "product_name",
+                    "volume",
+                    "location"
+                ],
+                "title": "ProductInventory"
+            }
+        }
+    }
+}

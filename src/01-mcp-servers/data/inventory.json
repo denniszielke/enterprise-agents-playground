@@ -1,0 +1,76 @@
+{
+    "inventory": [
+        {
+            "product_id": "PROD0",
+            "product_name": "Dove Shampoo 500ml",
+            "volume": 2,
+            "location": "USEast"
+        },
+        {
+            "product_id": "PROD1",
+            "product_name": "Dove Bar Soap 4-Pack",
+            "volume": 4,
+            "location": "USEast"
+        },
+        {
+            "product_id": "PROD2",
+            "product_name": "Close-Up Toothpaste 150g",
+            "volume": 1,
+            "location": "USEast"
+        },
+        {
+            "product_id": "PROD2",
+            "product_name": "Close-Up Toothpaste 150g",
+            "volume": 5,
+            "location": "USEast"
+        },
+        {
+            "product_id": "PROD2",
+            "product_name": "Close-Up Toothpaste 150g",
+            "volume": 5,
+            "location": "USEast"
+        },
+        {
+            "product_id": "PROD0",
+            "product_name": "Dove Shampoo 500ml",
+            "volume": 1,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD1",
+            "product_name": "Dove Bar Soap 4-Pack",
+            "volume": 4,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD2",
+            "product_name": "Close-Up Toothpaste 150g",
+            "volume": 2,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD4",
+            "product_name": "Knorr Bouillon Cubes 12-Pack",
+            "volume": 1,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD4",
+            "product_name": "Knorr Bouillon Cubes 12-Pack",
+            "volume": 5,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD4",
+            "product_name": "Knorr Bouillon Cubes 12-Pack",
+            "volume": 2,
+            "location": "EuropeWest"
+        },
+        {
+            "product_id": "PROD4",
+            "product_name": "Knorr Bouillon Cubes 12-Pack",
+            "volume": 1,
+            "location": "EuropeWest"
+        }
+    ]
+}

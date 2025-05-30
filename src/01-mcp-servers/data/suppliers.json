@@ -1,0 +1,129 @@
+{
+    "suppliers": [
+        {  
+            "supplier_id": "SUPP0",  
+            "supplier_name": "Unilever Wholesale Partner North",  
+            "contract_id": "CONTRACT0",  
+            "contract_name": "Personal Care Products Contract",  
+            "products": [  
+                {  
+                    "product_id": "PROD0",  
+                    "product_name": "Dove Shampoo 500ml",  
+                    "list_price": 6.99,  
+                    "description": "Nourishing shampoo for soft and smooth hair.",  
+                    "features": [  
+                        "Moisturizing formula",  
+                        "Paraben-free"  
+                    ]  
+                },  
+                {  
+                    "product_id": "PROD1",  
+                    "product_name": "Dove Bar Soap 4-Pack",  
+                    "list_price": 4.49,  
+                    "description": "Gentle cleansing soap for sensitive skin.",  
+                    "features": [  
+                        "1/4 moisturizing cream",  
+                        "Dermatologist recommended"  
+                    ]  
+                },  
+                {  
+                    "product_id": "PROD2",  
+                    "product_name": "Close-Up Toothpaste 150g",  
+                    "list_price": 2.99,  
+                    "description": "Fresh breath and whitening toothpaste.",  
+                    "features": [  
+                        "Mint flavor",  
+                        "Fluoride protection"  
+                    ]  
+                },  
+                {  
+                    "product_id": "PROD22",  
+                    "product_name": "Close-Up Toothpaste 350g",  
+                    "list_price": 3.99,  
+                    "description": "Fresh breath and whitening toothpaste.",  
+                    "features": [  
+                        "Mint flavor",  
+                        "Fluoride protection"  
+                    ]  
+                }  
+            ],  
+            "discounts": [  
+                {  
+                    "discount_id": "DISCOUNT0",  
+                    "discount_name": "Dove Shampoo Bulk Discount",  
+                    "discount_price": 6.49,  
+                    "product_id": "PROD0",  
+                    "discount_volume": 50  
+                },  
+                {  
+                    "discount_id": "DISCOUNT1",  
+                    "discount_name": "Dove Soap Bulk Discount",  
+                    "discount_price": 4.19,  
+                    "product_id": "PROD1",  
+                    "discount_volume": 2  
+                },  
+                {  
+                    "discount_id": "DISCOUNT2",  
+                    "discount_name": "Close-Up Toothpaste Bulk Discount",  
+                    "discount_price": 2.69,  
+                    "product_id": "PROD2",  
+                    "discount_volume": 3  
+                }  
+            ]  
+        },  
+        {  
+            "supplier_id": "SUPP1",  
+            "supplier_name": "Unilever Wholesale Partner South",  
+            "contract_id": "CONTRACT1",  
+            "contract_name": "Food Products Contract",  
+            "products": [  
+                {  
+                    "product_id": "PROD3",  
+                    "product_name": "Hellmann's Mayonnaise 500ml",  
+                    "list_price": 3.99,  
+                    "description": "Creamy mayonnaise made with real eggs.",  
+                    "features": [  
+                        "Gluten-free",  
+                        "No artificial flavors"  
+                    ]  
+                },  
+                {  
+                    "product_id": "PROD4",  
+                    "product_name": "Knorr Bouillon Cubes 12-Pack",  
+                    "list_price": 2.49,  
+                    "description": "Flavorful bouillon cubes for soups and stews.",  
+                    "features": [  
+                        "Low sodium",  
+                        "Vegetarian"  
+                    ]  
+                },  
+                {  
+                    "product_id": "PROD5",  
+                    "product_name": "Knorr Bouillon Cubes 24-Pack",  
+                    "list_price": 3.49,  
+                    "description": "Flavorful bouillon cubes for soups and stews.",  
+                    "features": [  
+                        "Low sodium",  
+                        "Vegetarian"  
+                    ]  
+                }  
+            ],  
+            "discounts": [  
+                {  
+                    "discount_id": "DISCOUNT3",  
+                    "discount_name": "Hellmann's Mayonnaise Bulk Discount",  
+                    "discount_price": 3.49,  
+                    "product_id": "PROD3",  
+                    "discount_volume": 50  
+                },  
+                {  
+                    "discount_id": "DISCOUNT4",  
+                    "discount_name": "Knorr Bouillon Cubes Bulk Discount",  
+                    "discount_price": 2.29,  
+                    "product_id": "PROD4",  
+                    "discount_volume": 3  
+                }  
+            ] 
+        }
+    ]
+}

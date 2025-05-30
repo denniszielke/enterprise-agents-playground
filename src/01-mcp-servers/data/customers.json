@@ -1,0 +1,70 @@
+{
+    "customers": [
+        {
+            "customer_id": "CUST0",
+            "customer_name": "Alice Johnson",
+            "customer_address": "123 Maple Street, Springfield, IL",
+            "customer_phone": "555-123-4567",
+            "customer_email": "alice.johnson@example.com",
+            "customer_discount": [
+                {
+                    "customer_id": "CUST0",
+                    "discount_id": "DISCOUNT0",
+                    "discount_name": "Dove Shampoo Bulk Discount",
+                    "discount_price": 6.49,
+                    "product_id": "PROD0",
+                    "discount_volume": 50
+                },
+                {
+                    "customer_id": "CUST0",
+                    "discount_id": "DISCOUNT1",
+                    "discount_name": "Dove Soap Bulk Discount",
+                    "discount_price": 4.19,
+                    "product_id": "PROD1",
+                    "discount_volume": 100
+                },
+                {
+                    "customer_id": "CUST0",
+                    "discount_id": "DISCOUNT2",
+                    "discount_name": "Close-Up Toothpaste Bulk Discount",
+                    "discount_price": 2.69,
+                    "product_id": "PROD2",
+                    "discount_volume": 200
+                }
+            ]
+        },
+        {
+            "customer_id": "CUST1",
+            "customer_name": "Bob Smith",
+            "customer_address": "123 BerlinSt, Munich, Germany",
+            "customer_phone": "555-987-6543",
+            "customer_email": "bob.smith@example.com",
+            "customer_discount": [
+                {
+                    "customer_id": "CUST1",
+                    "discount_id": "DISCOUNT0",
+                    "discount_name": "Dove Shampoo Bulk Discount",
+                    "discount_price": 6.49,
+                    "product_id": "PROD0",
+                    "discount_volume": 50
+                },
+                {
+                    "customer_id": "CUST1",
+                    "discount_id": "DISCOUNT1",
+                    "discount_name": "Dove Soap Bulk Discount",
+                    "discount_price": 4.19,
+                    "product_id": "PROD1",
+                    "discount_volume": 100
+                },
+                {
+                    "customer_id": "CUST1",
+                    "discount_id": "DISCOUNT2",
+                    "discount_name": "Close-Up Toothpaste Bulk Discount",
+                    "discount_price": 2.69,
+                    "product_id": "PROD2",
+                    "discount_volume": 200
+                }
+            ]
+        }
+    ]
+}

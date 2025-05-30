@@ -1,0 +1,368 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "DiscountAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/customers/id/{customer_id}": {
+            "get": {
+                "summary": "Get Customer By Id",
+                "description": "Get customer by ID",
+                "operationId": "get_customer_by_id",
+                "parameters": [
+                    {
+                        "name": "customer_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Customer Id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/customers/name/{customer_name}": {
+            "get": {
+                "summary": "Get Customer By Name",
+                "description": "Get customer by name",
+                "operationId": "get_customer_by_name",
+                "parameters": [
+                    {
+                        "name": "customer_name",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Customer Name"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        },
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/products/all": {
+            "get": {
+                "summary": "Get All Products",
+                "description": "Get all products",
+                "operationId": "get_all_products",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Product"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get All Products"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/discounts/all": {
+            "get": {
+                "summary": "Get All Discounts",
+                "description": "Get all discounts",
+                "operationId": "get_all_discounts",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Discount"
+                                    },
+                                    "type": "array",
+                                    "title": "Response Get All Discounts"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Message"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Customer": {
+                "properties": {
+                    "customer_id": {
+                        "type": "string",
+                        "title": "Customer Id"
+                    },
+                    "customer_name": {
+                        "type": "string",
+                        "title": "Customer Name"
+                    },
+                    "customer_address": {
+                        "type": "string",
+                        "title": "Customer Address"
+                    },
+                    "customer_phone": {
+                        "type": "string",
+                        "title": "Customer Phone"
+                    },
+                    "customer_email": {
+                        "type": "string",
+                        "title": "Customer Email"
+                    },
+                    "customer_discount": {
+                        "items": {
+                            "$ref": "#/components/schemas/CustomerDiscount"
+                        },
+                        "type": "array",
+                        "title": "Customer Discount"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "customer_id",
+                    "customer_name",
+                    "customer_address",
+                    "customer_phone",
+                    "customer_email"
+                ],
+                "title": "Customer"
+            },
+            "CustomerDiscount": {
+                "properties": {
+                    "customer_id": {
+                        "type": "string",
+                        "title": "Customer Id"
+                    },
+                    "discount_id": {
+                        "type": "string",
+                        "title": "Discount Id"
+                    },
+                    "discount_name": {
+                        "type": "string",
+                        "title": "Discount Name"
+                    },
+                    "discount_price": {
+                        "type": "number",
+                        "title": "Discount Price"
+                    },
+                    "product_id": {
+                        "type": "string",
+                        "title": "Product Id"
+                    },
+                    "discount_volume": {
+                        "type": "integer",
+                        "title": "Discount Volume"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "customer_id",
+                    "discount_id",
+                    "discount_name",
+                    "discount_price",
+                    "product_id",
+                    "discount_volume"
+                ],
+                "title": "CustomerDiscount"
+            },
+            "Discount": {
+                "properties": {
+                    "discount_id": {
+                        "type": "string",
+                        "title": "Discount Id"
+                    },
+                    "discount_name": {
+                        "type": "string",
+                        "title": "Discount Name"
+                    },
+                    "discount_price": {
+                        "type": "number",
+                        "title": "Discount Price"
+                    },
+                    "product_id": {
+                        "type": "string",
+                        "title": "Product Id"
+                    },
+                    "discount_volume": {
+                        "type": "integer",
+                        "title": "Discount Volume"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "discount_id",
+                    "discount_name",
+                    "discount_price",
+                    "product_id",
+                    "discount_volume"
+                ],
+                "title": "Discount"
+            },
+            "Message": {
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "title": "Message"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "message"
+                ],
+                "title": "Message"
+            },
+            "Order": {
+                "properties": {
+                    "customer_id": {
+                        "type": "string",
+                        "title": "Customer Id"
+                    },
+                    "order_id": {
+                        "type": "string",
+                        "title": "Order Id"
+                    },
+                    "order_date": {
+                        "type": "string",
+                        "title": "Order Date"
+                    },
+                    "order_status": {
+                        "type": "string",
+                        "title": "Order Status"
+                    },
+                    "fill_date": {
+                        "type": "string",
+                        "title": "Fill Date"
+                    },
+                    "fill_strategy": {
+                        "type": "string",
+                        "title": "Fill Strategy"
+                    },
+                    "order_items": {
+                        "items": {
+                            "$ref": "#/components/schemas/Product"
+                        },
+                        "type": "array",
+                        "title": "Order Items"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "customer_id",
+                    "order_id",
+                    "order_date",
+                    "order_status",
+                    "fill_date"
+                ],
+                "title": "Order"
+            },
+            "Product": {
+                "properties": {
+                    "product_id": {
+                        "type": "string",
+                        "title": "Product Id"
+                    },
+                    "product_name": {
+                        "type": "string",
+                        "title": "Product Name"
+                    },
+                    "list_price": {
+                        "type": "number",
+                        "title": "List Price"
+                    },
+                    "description": {
+                        "type": "string",
+                        "title": "Description"
+                    },
+                    "features": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array",
+                        "title": "Features"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "product_id",
+                    "product_name",
+                    "list_price",
+                    "description",
+                    "features"
+                ],
+                "title": "Product"
+            }
+        }
+    },
+    "servers": [
+        {
+            "url": "https://l66ctpb6-8000.euw.devtunnels.ms"
+        }
+    ]
+}

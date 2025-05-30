@@ -1,0 +1,144 @@
+{
+    "orders": [
+        {
+            "customer_id": "CUST0",
+            "order_id": "ORD-122",
+            "order_date": "2023-10-01",
+            "order_status": "Pending",
+            "fill_date": "2023-10-02",
+            "fill_strategy": "Standard",
+            "order_items": [
+                {
+                    "product_id": "PROD0",
+                    "product_name": "Dove Shampoo 500ml",
+                    "list_price": 6.99,
+                    "description": "Nourishing shampoo for soft and smooth hair.",
+                    "features": [
+                        "Moisturizing formula",
+                        "Paraben-free"
+                    ]
+                },
+                {
+                    "product_id": "PROD1",
+                    "product_name": "Dove Bar Soap 4-Pack",
+                    "list_price": 4.49,
+                    "description": "Gentle cleansing soap for sensitive skin.",
+                    "features": [
+                        "1/4 moisturizing cream",
+                        "Dermatologist recommended"
+                    ]
+                },
+                {
+                    "product_id": "PROD2",
+                    "product_name": "Close-Up Toothpaste 150g",
+                    "list_price": 2.99,
+                    "description": "Fresh breath and whitening toothpaste.",
+                    "features": [
+                        "Mint flavor",
+                        "Fluoride protection"
+                    ]
+                },
+                {
+                    "product_id": "PROD2",
+                    "product_name": "Close-Up Toothpaste 150g",
+                    "list_price": 2.99,
+                    "description": "Fresh breath and whitening toothpaste.",
+                    "features": [
+                        "Mint flavor",
+                        "Fluoride protection"
+                    ]
+                },
+                {
+                    "product_id": "PROD2",
+                    "product_name": "Close-Up Toothpaste 150g",
+                    "list_price": 2.99,
+                    "description": "Fresh breath and whitening toothpaste.",
+                    "features": [
+                        "Mint flavor",
+                        "Fluoride protection"
+                    ]
+                }
+            ]
+        },
+        {
+            "customer_id": "CUST1",
+            "order_id": "ORD-124",
+            "order_date": "2023-10-01",
+            "order_status": "Pending",
+            "fill_date": "2023-10-02",
+            "fill_strategy": "Standard",
+            "order_items": [
+                {
+                    "product_id": "PROD0",
+                    "product_name": "Dove Shampoo 500ml",
+                    "list_price": 6.99,
+                    "description": "Nourishing shampoo for soft and smooth hair.",
+                    "features": [
+                        "Moisturizing formula",
+                        "Paraben-free"
+                    ]
+                },
+                {
+                    "product_id": "PROD1",
+                    "product_name": "Dove Bar Soap 4-Pack",
+                    "list_price": 4.49,
+                    "description": "Gentle cleansing soap for sensitive skin.",
+                    "features": [
+                        "1/4 moisturizing cream",
+                        "Dermatologist recommended"
+                    ]
+                },
+                {
+                    "product_id": "PROD2",
+                    "product_name": "Close-Up Toothpaste 150g",
+                    "list_price": 2.99,
+                    "description": "Fresh breath and whitening toothpaste.",
+                    "features": [
+                        "Mint flavor",
+                        "Fluoride protection"
+                    ]
+                },
+                {
+                    "product_id": "PROD4",
+                    "product_name": "Knorr Bouillon Cubes 12-Pack",
+                    "list_price": 2.49,
+                    "description": "Flavorful bouillon cubes for soups and stews.",
+                    "features": [
+                        "Low sodium",
+                        "Vegetarian"
+                    ]
+                },
+                {
+                    "product_id": "PROD4",
+                    "product_name": "Knorr Bouillon Cubes 12-Pack",
+                    "list_price": 2.49,
+                    "description": "Flavorful bouillon cubes for soups and stews.",
+                    "features": [
+                        "Low sodium",
+                        "Vegetarian"
+                    ]
+                },
+                {
+                    "product_id": "PROD4",
+                    "product_name": "Knorr Bouillon Cubes 12-Pack",
+                    "list_price": 2.49,
+                    "description": "Flavorful bouillon cubes for soups and stews.",
+                    "features": [
+                        "Low sodium",
+                        "Vegetarian"
+                    ]
+                },
+                {
+                    "product_id": "PROD4",
+                    "product_name": "Knorr Bouillon Cubes 12-Pack",
+                    "list_price": 2.49,
+                    "description": "Flavorful bouillon cubes for soups and stews.",
+                    "features": [
+                        "Low sodium",
+                        "Vegetarian"
+                    ]
+                }
+            ]
+        }
+    ]
+}
