@@ -1,0 +1,30 @@
+{
+    "[json]": {
+        "editor.quickSuggestions": false,
+        "editor.suggest.showWords": false,
+        "editor.suggest.showSnippets": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "scope": [
+                    "string.key.json"
+                ],
+                "settings": {
+                    "foreground": "#FF8800",
+                    "fontStyle": "bold"
+                }
+            },
+            {
+                "scope": [
+                    "constant.numeric.json"
+                ],
+                "settings": {
+                    "foreground": "#2AF598"
+                }
+            }
+        ]
+    }
+}
