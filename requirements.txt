@@ -1,5 +1,6 @@
 azure-identity==1.23.0
 azure-ai-projects==1.0.0b11
+azure-ai-agents==1.1.0b2
 azure-ai-inference[prompts]==1.0.0b9
 fastapi==0.115.12
 uvicorn==0.34.2
