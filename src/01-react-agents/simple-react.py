@@ -102,8 +102,8 @@ def get_current_time(location: str) -> str:
         return "Sorry, I couldn't find the timezone for that location."
     
 tools = []
-tools = [get_current_time]
-tools = [get_current_username, get_current_location, get_current_time]
+# tools = [get_current_time]
+# tools = [get_current_username, get_current_location, get_current_time]
 
 commandprompt = '''
     ##

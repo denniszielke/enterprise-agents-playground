@@ -34,6 +34,9 @@ llm = AzureAIChatCompletionsModel(
     client_kwargs={"credential_scopes": [ "https://ai.azure.com/.default"]},
 )
 
+project_connection_string = os.getenv("PROJECT_CONNECTION_STRING")
+PROJECT_CONNECTION_STRING="uksouth.api.azureml.ms;892cd868-0dde-415d-9178-fa99dd1d04a5;agent-catalogue;dzielkeagentsdfl"
+
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
@@ -52,7 +55,7 @@ server_params = StdioServerParameters(
         "azure_agent_mcp_server"
       ],
     env=  {
-        "PROJECT_CONNECTION_STRING": os.getenv("PROJECT_CONNECTION_STRING")
+        "PROJECT_CONNECTION_STRING": project_connection_string
     }
 )
 
