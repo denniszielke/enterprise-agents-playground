@@ -86,22 +86,21 @@ with agents_client:
             last_text = msg.text_messages[-1]
             print(f"{msg.role}: {last_text.text.value}")
 
-    for image_content in messages.image_contents:
-        file_id = image_content.image_file.file_id
-        print(f"Image File ID: {file_id}")
-        file_name = f"{file_id}_image_file.png"
-        agents_client.save_file(file_id=file_id, file_name=file_name)
-        print(f"Saved image file to: {Path.cwd() / file_name}")
+        for image_content in msg.image_contents:
+            file_id = image_content.image_file.file_id
+            print(f"Image File ID: {file_id}")
+            file_name = f"{file_id}_image_file.png"
+            project_client.agents.files.save(file_id=file_id, file_name=file_name)
+            print(f"Saved image file to: {Path.cwd() / file_name}")
 
-    for file_path_annotation in messages.file_path_annotations:
-        print(f"File Paths:")
-        print(f"Type: {file_path_annotation.type}")
-        print(f"Text: {file_path_annotation.text}")
-        print(f"File ID: {file_path_annotation.file_path.file_id}")
-        print(f"Start Index: {file_path_annotation.start_index}")
-        print(f"End Index: {file_path_annotation.end_index}")
+        for file_path_annotation in msg.file_path_annotations:
+            print(f"File Paths:")
+            print(f"Type: {file_path_annotation.type}")
+            print(f"Text: {file_path_annotation.text}")
+            print(f"File ID: {file_path_annotation.file_path.file_id}")
+            print(f"Start Index: {file_path_annotation.start_index}")
+            print(f"End Index: {file_path_annotation.end_index}")
     # [END get_messages_and_save_files]
-
 
     agents_client.delete_agent(agent.id)
     print("Deleted agent")
