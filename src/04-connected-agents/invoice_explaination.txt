@@ -1,0 +1,51 @@
+Erklärung der wichtigsten XML-Elemente einer XRechnung
+Das XML-Format der XRechnung besteht aus mehreren Elementen, die in einem hierarchischen Aufbau organisiert sind. Jedes Element hat eine bestimmte Funktion und liefert spezifische Informationen, die für die Verarbeitung der elektronischen Rechnung erforderlich sind. Im Folgenden werden die wichtigsten XML-Elemente und deren Bedeutung detailliert beschrieben.
+
+1. CustomizationID
+Dieses Element gibt an, welche Version und welche spezifischen Anforderungen für die Rechnung gelten. In diesem Beispiel steht die CustomizationID für die Spezifikation der XRechnung Version 3.0. Sie basiert auf der europäischen Norm EN 16931 und stellt sicher, dass die Rechnung den gesetzlichen Anforderungen für elektronische Rechnungen entspricht.
+
+2. ProfileID
+Die ProfileID beschreibt das Profil, das für die Rechnungsübermittlung verwendet wird. In diesem Fall bezieht sich der Wert auf das Peppol-Netzwerk, ein weit verbreitetes Netzwerk für den sicheren Austausch elektronischer Dokumente in Europa. Es ermöglicht eine standardisierte Übermittlung der Rechnung an den Empfänger.
+
+3. ID, IssueDate und DueDate
+
+ID: Diese Angabe stellt die eindeutige Rechnungsnummer dar, die zur Identifizierung der Rechnung dient. Sie ist besonders wichtig für den Abgleich und die Buchhaltung.
+IssueDate: Das Ausstellungsdatum der Rechnung, das angibt, wann die Rechnung erstellt wurde.
+DueDate: Das Fälligkeitsdatum der Rechnung, bis zu dem die Zahlung erfolgen muss. Es ist entscheidend für die Zahlungsfristen und die Liquiditätsplanung des Rechnungsempfängers.
+4. InvoiceTypeCode
+Dieses Element definiert den Typ des Rechnungsdokuments. Der Code 380 steht hier für eine normale Rechnung. Es gibt auch andere Codes, wie z.B. Gutschriften, die durch unterschiedliche Werte gekennzeichnet werden.
+
+5. DocumentCurrencyCode
+Der DocumentCurrencyCode gibt an, in welcher Währung die Beträge in der Rechnung angegeben sind. In diesem Fall ist es EUR (Euro), was in der EU üblich ist.
+
+6. AccountingSupplierParty und AccountingCustomerParty
+Diese Abschnitte enthalten Informationen zu den beteiligten Parteien:
+
+AccountingSupplierParty: Enthält die Angaben zum Rechnungssteller, wie Name, Adresse, Steuerinformationen und Kontaktangaben. Diese Daten sind wichtig, um die Rechnung rechtlich und buchhalterisch korrekt zuzuordnen.
+AccountingCustomerParty: Gibt die Details des Rechnungsempfängers an, einschließlich Firmenname, Adresse und rechtlicher Name. Diese Informationen sind für den Zahlungsempfänger erforderlich, um die Rechnung korrekt zuzuordnen.
+7. PaymentMeans
+Dieses Element beschreibt die Zahlungsmethode, die für diese Rechnung verwendet wird. Der PaymentMeansCode 58 deutet auf eine Überweisung hin. Zusätzlich enthält dieser Abschnitt Informationen zum Zahlungskonto des Empfängers, wie die IBAN und den Namen des Kontoinhabers, was für die Durchführung der Zahlung benötigt wird.
+
+8. TaxTotal und TaxSubtotal
+Diese Elemente geben die Gesamtsteuerbeträge und deren Aufschlüsselung an:
+TaxableAmount: Gibt die absolute Rechnungssumme aus der Rechnung an.
+TaxAmount: Gibt den Betrag an der als Steuer abgeführt werden muss.
+TaxTotal: Der gesamte versteuerbare Bruttobetrag, der auf die Rechnung erhoben wird, in diesem Fall 9,49 EUR. Es ist wichtig für die Steuerberechnung und die Einhaltung der Mehrwertsteuerpflichten.
+TaxSubtotal: Gibt die Details der Steuerberechnung an, einschließlich des steuerpflichtigen Betrags und des spezifischen Steuersatzes (19 %). Diese Informationen sind notwendig, um die Steuer korrekt aufzuschlüsseln und auszuweisen.
+9. LegalMonetaryTotal
+Hier werden die Gesamtbeträge der Rechnung zusammengefasst:
+
+LineExtensionAmount: Der Netto-Rechnungsbetrag, also der Gesamtbetrag ohne Steuern.
+TaxExclusiveAmount: Betrag ohne Steuer, identisch mit dem LineExtensionAmount.
+TaxInclusiveAmount: Der Rechnungsbetrag inklusive der Steuer.
+PayableAmount: Der endgültig zu zahlende Betrag. Dieser Betrag ist für den Empfänger der wichtigste Wert, da er angibt, wie viel bezahlt werden muss.
+10. InvoiceLine
+Jede InvoiceLine stellt eine Position auf der Rechnung dar, die Details zu einem verkauften Artikel oder einer Dienstleistung enthält:
+
+ID: Identifikationsnummer der Rechnungsposition.
+InvoicedQuantity: Die Menge der gelieferten Waren oder Dienstleistungen, in diesem Fall 5 Stück.
+LineExtensionAmount: Der Gesamtpreis für diese Rechnungsposition.
+Item: Informationen über das Produkt oder die Dienstleistung, wie die Beschreibung und der Name.
+ClassifiedTaxCategory: Steuerkategorie, die den angewendeten Steuersatz angibt (hier 19 %).
+Price: Der Einzelpreis des Produkts oder der Dienstleistung.
+Die Positionen ermöglichen eine detaillierte Aufschlüsselung der Leistungen, was für eine klare und transparente Rechnungsdarstellung wichtig ist.
