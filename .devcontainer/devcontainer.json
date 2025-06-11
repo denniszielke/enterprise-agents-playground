@@ -2,10 +2,10 @@
     "name": "Azure Developer CLI",
     "build": { "dockerfile": "Dockerfile" },
     "features": {
-        "ghcr.io/devcontainers/features/azure-cli:1": {
-            "version": "2.62.0"
+        "ghcr.io/devcontainers/features/azure-cli:latest": {
+            "version": "2.73.0"
         },
-        "ghcr.io/devcontainers/features/docker-from-docker:1": {
+        "ghcr.io/devcontainers/features/docker-from-docker:latest": {
             "version": "20.10"
         },
         "ghcr.io/devcontainers/features/github-cli:1": {
@@ -31,12 +31,12 @@
         },
         "codespaces": {
             "openFiles": [
-                "main.py"
+                "README.md"
             ]
         }
     },
     "forwardPorts": [
-        8501
+        8000
     ],
     "postAttachCommand": "",
     "remoteUser": "vscode",
