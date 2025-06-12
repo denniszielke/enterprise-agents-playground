@@ -16,6 +16,7 @@ session_name = os.environ.get("SESSION_NAME", "default")
 subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID environment variable is set
 resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
+region = os.environ["REGION"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
@@ -34,9 +35,7 @@ llm = AzureAIChatCompletionsModel(
     client_kwargs={"credential_scopes": [ "https://ai.azure.com/.default"]},
 )
 
-project_connection_string = os.getenv("PROJECT_CONNECTION_STRING")
-PROJECT_CONNECTION_STRING="uksouth.api.azureml.ms;892cd868-0dde-415d-9178-fa99dd1d04a5;agent-catalogue;dzielkeagentsdfl"
-
+project_connection_string = f"{region}.api.azureml.ms;{subscription_id};{project_name}"
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client

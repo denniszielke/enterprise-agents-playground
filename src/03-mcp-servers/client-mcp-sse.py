@@ -26,6 +26,8 @@ session_name = os.environ.get("SESSION_NAME", "default")
 subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID environment variable is set
 resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
+datetimespace_mcp_url = os.environ["DATETIMESPACE_MCP_URL"]
+customers_mcp_url = os.environ["CUSTOMERS_MCP_URL"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
@@ -60,7 +62,12 @@ async def main():
         {
             "datetimespace": {
                 # make sure you start your weather server on port 8000
-                "url": "http://localhost:8000/sse",
+                "url": datetimespace_mcp_url,
+                "transport": "sse",
+            },
+            "customers": {
+                # make sure you start your weather server on port 8000
+                "url": customers_mcp_url,
                 "transport": "sse",
             }
         }

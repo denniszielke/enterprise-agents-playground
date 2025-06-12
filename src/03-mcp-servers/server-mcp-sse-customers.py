@@ -99,4 +99,4 @@ async def check_mcp(mcp: FastMCP):
 
 if __name__ == "__main__":
     asyncio.run(check_mcp(mcp))
-    uvicorn.run(sse_app, host="0.0.0.0", port=8000)
+    uvicorn.run(sse_app, host="0.0.0.0", port=8001)
