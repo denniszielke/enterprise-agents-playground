@@ -104,6 +104,7 @@ with tracer.start_as_current_span(f"{session_name}-code-tracing"):
         print(f"Run finished with status: {run.status}")
         # </message_processing>
 
+        print(f"Run ID: {run.id}")
             # Poll the run as long as run status is queued or in progress
         while run.status in ["queued", "in_progress", "requires_action"]:
             # Wait for a second

@@ -2,6 +2,7 @@ azure-identity==1.23.0
 azure-ai-projects==1.0.0b11
 azure-ai-agents==1.1.0b2
 azure-ai-inference[prompts]==1.0.0b9
+azure-ai-evaluation==1.8.0
 fastapi==0.115.12
 uvicorn==0.34.2
 langchain==0.3.25
