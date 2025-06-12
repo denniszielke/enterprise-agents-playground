@@ -1,10 +1,6 @@
 {
     "[json]": {
-        "editor.quickSuggestions": {
-            "comments": "off",
-            "strings": "off",
-            "other": "off"
-        },
+        "editor.quickSuggestions": false,
         "editor.suggest.showWords": false,
         "editor.suggest.showSnippets": true,
         "editor.formatOnSave": true,

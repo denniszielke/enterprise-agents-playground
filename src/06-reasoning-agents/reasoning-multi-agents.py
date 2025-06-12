@@ -15,7 +15,7 @@ load_dotenv(override=True)
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
-reasoning_model_deployment_name = os.environ.get("REASONING_MODEL_DEPLOYMENT_NAME", model_deployment_name)  # Use reasoning model if specified
+reasoning_model_deployment_name = os.environ["REASONING_MODEL_DEPLOYMENT_NAME"] #os.environ.get("REASONING_MODEL_DEPLOYMENT_NAME", model_deployment_name)  # Use reasoning model if specified
 session_name = os.environ.get("SESSION_NAME", "default")
 
 project_endpoint = os.environ.get("PROJECT_ENDPOINT", f"https://{foundry_name}.services.ai.azure.com/api/projects/{project_name}")

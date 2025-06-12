@@ -30,6 +30,11 @@ A simple LLM-based chatbot primarily focuses on generating responses based on pr
 
 [Deploy To Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fazure-ai-foundry%2Ffoundry-samples%2Frefs%2Fheads%2Fmain%2Fsamples%2Fmicrosoft%2Finfrastructure-setup%2F40-basic-agent-setup%2Fbasic-setup.json)
 
+The following model types are used in this repo:
+- gpt-4o-mini
+- gpt-4o
+- gpt-4.1-nano
+- o3-mini
 
 ## Smoke test
 

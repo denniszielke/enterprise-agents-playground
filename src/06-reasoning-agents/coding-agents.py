@@ -27,7 +27,6 @@ endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
-model_deployment_name = "gpt-4o"
 token_provider = get_bearer_token_provider(
     credential, "https://ai.azure.com/.default"
 )
@@ -57,7 +56,7 @@ class Statement(BaseModel):
 
 def model_response(input) -> Statement:
     completion = model.beta.chat.completions.parse(
-        model = os.getenv("AZURE_OPENAI_COMPLETION_DEPLOYMENT_NAME"),
+        model = model_deployment_name,
         messages = [{"role" : "assistant", "content" : f""" Help me understand the following by giving me a response to the question, a short reasoning on why the response is correct and a rating on the certainty on the correctness of the response:  {input}"""}],
         response_format = Statement)
     
