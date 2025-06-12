@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+**/deploy.sh
 # C extensions
 *.so
 scratch.txt

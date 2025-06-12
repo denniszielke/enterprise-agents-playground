@@ -23,4 +23,4 @@ COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 COPY . .
 EXPOSE $PORT
-ENTRYPOINT [ "python", "run-all.py" ]
+ENTRYPOINT [ "python", "run-mcp-time.py" ]

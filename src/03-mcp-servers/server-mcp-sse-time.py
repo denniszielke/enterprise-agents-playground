@@ -1,8 +1,13 @@
-import asyncio
+import uvicorn
+import os
 import pytz
 from datetime import datetime
 from dotenv import load_dotenv
-from typing import Any
+import asyncio
+from fastmcp import FastMCP
+from fastmcp.server.dependencies import get_http_request
+from starlette.requests import Request
+
 
 from typing import List
 from fastmcp import FastMCP
@@ -11,6 +16,8 @@ from mcp.server.fastmcp.prompts import base
 load_dotenv()
 
 mcp = FastMCP("DateTimeSpace")
+
+sse_app = mcp.http_app(path="/sse", transport="sse")
 
 users = {
     "Dennis": {
@@ -113,8 +120,8 @@ async def check_mcp(mcp: FastMCP):
 
 if __name__ == "__main__":
     try:
-        # asyncio.run(check_mcp(mcp))
-        mcp.run(transport="sse", host="0.0.0.0", port=8000)
+        asyncio.run(check_mcp(mcp))
+        uvicorn.run(sse_app, host="0.0.0.0", port=8000)
     except KeyboardInterrupt:
         print("\nProgram interrupted by user. Cleaning up...")
     except Exception as e:
