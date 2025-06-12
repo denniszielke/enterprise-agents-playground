@@ -2,7 +2,7 @@
 
 The objective of this lab is to learn how one agent can dynamically discover other agents and delegate tasks to them
 
-https://github.com/azure-ai-foundry/mcp-foundry
+The azure foundry mcp server can be found here: https://github.com/azure-ai-foundry/mcp-foundry
 
 ## Steps
 

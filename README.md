@@ -49,8 +49,8 @@ The scope of this workshop covers the following scenarios and technology stacks:
 | Name | Description | Technology  |
 | :-- | :--| :-- |
 | [Hello World](./src/00-hello-world/README.md) | Hello World model | Azure Foundry Agent, Open Telemetry |
-| [Single Agent](./src/01-react-agents/README.md) | ReAct Agent | Azure Foundry Agent, LangGraph |
-| [Agent RAG](./src/02-agents-rag/README.md) | Agentic RAG and Code execution | Azure Foundry Agent |
+| [Agent RAG](./src/01-agents-rag/README.md) | Agentic RAG and Code execution | Azure Foundry Agent |
+| [Single Agent](./src/02-react-agents/README.md) | ReAct Agent | Azure Foundry Agent, LangGraph |
 | [MCP Servers](./src/03-mcp-servers/README.mdy) | Model Context Protocol Servers| LangChain, FASTMCP |
 | [Connected Agents](./src/04-connected-agents/README.md) | Connected Agents | Foundry Agents |
 | [Agents as Tools](./src/05-agents-as-tools/README.md) | Agents via MCP | Foundry Agents, MCP |

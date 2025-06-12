@@ -1,26 +1,19 @@
-
-# Import necessary libraries and modules
-import sys
-import logging
 import os, time
 from azure.ai.agents import AgentsClient
+from azure.ai.agents.models import CodeInterpreterTool
+from azure.ai.agents.models import FilePurpose, MessageRole
 from azure.identity import DefaultAzureCredential
-from azure.ai.agents.models import ListSortOrder
-
+from pathlib import Path
 from dotenv import load_dotenv
-
+from azure.ai.agents.models import ListSortOrder
 load_dotenv()
-
-# Retrieve endpoint and model deployment name from environment variables
 
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
 session_name = os.environ.get("SESSION_NAME", "default")
+project_endpoint = os.environ["PROJECT_ENDPOINT"]
 
-project_endpoint = f"https://{foundry_name}.services.ai.azure.com/api/projects/{project_name}"
-
-# [START create_agents_client]
 agents_client = AgentsClient(
     endpoint=project_endpoint,
     credential=DefaultAzureCredential(),
@@ -33,38 +26,36 @@ project_client = AIProjectClient(
             exclude_environment_credential=True,
             exclude_managed_identity_credential=True
         ),
-        endpoint=os.environ["PROJECT_ENDPOINT"],
+        endpoint=project_endpoint,
     )
 
 from azure.monitor.opentelemetry import configure_azure_monitor
 connection_string = project_client.telemetry.get_connection_string()
-
-if not connection_string:
-    print("Application Insights is not enabled. Enable by going to Tracing in your Azure AI Foundry project.")
-    exit()
-
-
-tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.MachineLearningServices/workspaces/{project_name}"
-print(f"View traces at: {tracing_link}")
 
 configure_azure_monitor(connection_string=connection_string) #enable telemetry collection
 
 from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
-with tracer.start_as_current_span(f"{session_name}-hello-tracing"):
+with tracer.start_as_current_span(f"{session_name}-code-tracing"):
+
     with agents_client:
 
-        # [START create_agent]
+        # Upload a file and wait for it to be processed
+        # [START upload_file_and_create_agent_with_code_interpreter]
+        file = project_client.agents.files.upload_and_poll(file_path="./quarterly_results.csv", purpose=FilePurpose.AGENTS)
+        print(f"Uploaded file, file ID: {file.id}")
 
+        code_interpreter = CodeInterpreterTool(file_ids=[file.id])
+
+        # Create agent with code interpreter tool and tools_resources
         agent = agents_client.create_agent(
             model=model_deployment_name,
-            name=f"{session_name}-hello-agent",
+            name=f"{session_name}-code-agent",
             instructions="You are helpful agent",
+            tools=code_interpreter.definitions,
+            tool_resources=code_interpreter.resources,
         )
-        # [END create_agent]
-        print(f"Created agent, agent ID: {agent.id}")
-
         # [START create_thread]
         thread = agents_client.threads.create()
         # [END create_thread]
@@ -75,12 +66,14 @@ with tracer.start_as_current_span(f"{session_name}-hello-tracing"):
         threads = agents_client.threads.list()
         # [END list_threads]
 
-        # [START create_message]
-        message = agents_client.messages.create(thread_id=thread.id, role="user", content="Hello, tell me a joke")
-        # [END create_message]
+        # Create a message
+        message = agents_client.messages.create(
+            thread_id=thread.id,
+            role="user",
+            content="Could you please create bar chart in TRANSPORTATION sector for the operating profit from the uploaded csv file and provide file to me?",
+        )
         print(f"Created message, message ID: {message.id}")
 
-        # [START create_run]
         run = agents_client.runs.create(thread_id=thread.id, agent_id=agent.id)
 
         # Poll the run as long as run status is queued or in progress
@@ -94,13 +87,31 @@ with tracer.start_as_current_span(f"{session_name}-hello-tracing"):
         if run.status == "failed":
             print(f"Run error: {run.last_error}")
 
-        agents_client.delete_agent(agent.id)
-        print("Deleted agent")
+        project_client.agents.files.delete(file_id=file.id)
+        print("Deleted file")
 
-        # [START list_messages]
+        # [START get_messages_and_save_files]
         messages = agents_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
         for msg in messages:
             if msg.text_messages:
                 last_text = msg.text_messages[-1]
                 print(f"{msg.role}: {last_text.text.value}")
-        # [END list_messages]
+
+            for image_content in msg.image_contents:
+                file_id = image_content.image_file.file_id
+                print(f"Image File ID: {file_id}")
+                file_name = f"{file_id}_image_file.png"
+                project_client.agents.files.save(file_id=file_id, file_name=file_name)
+                print(f"Saved image file to: {Path.cwd() / file_name}")
+
+            for file_path_annotation in msg.file_path_annotations:
+                print(f"File Paths:")
+                print(f"Type: {file_path_annotation.type}")
+                print(f"Text: {file_path_annotation.text}")
+                print(f"File ID: {file_path_annotation.file_path.file_id}")
+                print(f"Start Index: {file_path_annotation.start_index}")
+                print(f"End Index: {file_path_annotation.end_index}")
+        # [END get_messages_and_save_files]
+
+        agents_client.delete_agent(agent.id)
+        print("Deleted agent")

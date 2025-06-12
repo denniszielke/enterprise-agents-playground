@@ -103,7 +103,7 @@ def get_current_time(location: str) -> str:
     
 tools = []
 # tools = [get_current_time]
-# tools = [get_current_username, get_current_location, get_current_time]
+tools = [get_current_username, get_current_location, get_current_time]
 
 commandprompt = '''
     ##
@@ -142,11 +142,16 @@ Thought:{agent_scratchpad}
 
 """
 
-graph = create_react_agent(llm, tools=tools, prompt=promptString)
+from opentelemetry import trace
+tracer = trace.get_tracer(__name__)
 
-input = "What is the current time here?"
+with tracer.start_as_current_span(f"{session_name}-react-tracing"):
 
-inputs = {"messages": [{"role": "user", "content": input}]}
-for chunk in graph.stream(inputs, stream_mode="updates"):
-    print(chunk)
+    graph = create_react_agent(llm, tools=tools, prompt=promptString)
+
+    input = "What is the current time here?"
+
+    inputs = {"messages": [{"role": "user", "content": input}]}
+    for chunk in graph.stream(inputs, stream_mode="updates"):
+        print(chunk)
        

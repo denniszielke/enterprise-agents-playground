@@ -2,6 +2,7 @@
 
 The objective of this lab is to learn how leverage tools and prompts from an MCP server
 
+![mcp](./mcp.png)
 
 ## Steps
 
