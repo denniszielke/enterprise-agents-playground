@@ -30,6 +30,29 @@ A simple LLM-based chatbot primarily focuses on generating responses based on pr
 
 [Deploy To Azure](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fazure-ai-foundry%2Ffoundry-samples%2Frefs%2Fheads%2Fmain%2Fsamples%2Fmicrosoft%2Finfrastructure-setup%2F40-basic-agent-setup%2Fbasic-setup.json)
 
+or use the following scripts to deploy foundry basic with an existing Azure OpenAI Resource
+
+```
+AOAI_NAME="cog-pge4idpaukhle"
+LOCATION="swedencentral"
+SUBSCRIPTION_ID=$(az account show --query id -o tsv) # here enter your subscription id
+TENANT_ID=$(az account show --query tenantId -o tsv)
+MY_OWN_OBJECT_ID=$(az ad signed-in-user show --query objectId --output tsv)
+RESOURCE_GROUP_AOAI="rg-dzagents"
+RESOURCE_GROUP_FOUNDRY="agents-basic"
+
+az group create --name $RESOURCE_GROUP_FOUNDRY --location $LOCATION
+
+# deploy
+az deployment group create \
+  --resource-group $RESOURCE_GROUP_FOUNDRY \
+  --template-file ./main.bicep \
+  --parameters existingAoaiResourceId="/subscriptions/$SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP_AOAI/providers/Microsoft.CognitiveServices/accounts/$AOAI_NAME" \
+               account_name='foundry' \
+               project_name='agentproject'
+
+```
+
 The following model types are used in this repo:
 - gpt-4o-mini
 - gpt-4o
