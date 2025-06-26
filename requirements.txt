@@ -26,3 +26,4 @@ mem0ai==0.1.104
 azure-search-documents==11.5.2
 uv==0.7.12
 jsonref==1.1.0
+mcp[cli]==1.9.4

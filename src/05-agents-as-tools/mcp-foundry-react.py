@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 import asyncio
 import dotenv
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
@@ -17,6 +18,8 @@ subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID en
 resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
 region = os.environ["REGION"]
+project_endpoint = os.environ["AGENT_PROJECT_ENDPOINT"]
+default_agent_id = os.getenv("DEFAULT_AGENT_ID")
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
@@ -43,18 +46,22 @@ from mcp.client.stdio import stdio_client
 from langchain_mcp_adapters.tools import load_mcp_tools
 from langgraph.prebuilt import create_react_agent
 
+current_folder = Path(__file__).resolve().parent.parent
+mcp_server_path = current_folder / "05-foundry-mcp"
+
 server_params = StdioServerParameters(
     command="uv",
     # Make sure to update to the full absolute path to your math_server.py file
     args= [
         "--directory",
-        os.getenv("FOUNDRY_MCP_LOCATION"),
+        f"{mcp_server_path.as_posix()}",
         "run",
         "-m",
         "azure_agent_mcp_server"
       ],
     env=  {
-        "PROJECT_CONNECTION_STRING": project_connection_string
+        "AGENT_PROJECT_ENDPOINT": project_endpoint,
+        "DEFAULT_AGENT_ID": default_agent_id
     }
 )
 
@@ -73,7 +80,7 @@ async def main():
 
             # Create and run the agent
             agent = create_react_agent(llm, tools)
-            agent_response = await agent.ainvoke({"messages": "check with the agents to compare the financial numbers from BMW and VW and compare 2023 and 2024"})
+            agent_response = await agent.ainvoke({"messages": "check with the agents to say hello world for me"})
             # pprint(agent_response)
 
             for message in agent_response["messages"]:
@@ -81,4 +88,9 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        print("\nProgram interrupted by user. Cleaning up...")
+    except Exception as e:
+        print(f"An error occurred: {e}")

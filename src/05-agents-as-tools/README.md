@@ -16,3 +16,16 @@ git clone https://github.com/azure-ai-foundry/mcp-foundry.git
 ```
 python mcp-foundry-react.py
 ```
+
+
+```bash
+# Setup environment with uv
+uv venv
+source .venv/bin/activate  # On macOS/Linux
+
+# Install dependencies
+uv add mcp==1.9.4 azure-identity==1.23.0 python-dotenv==1.1.0 azure-ai-projects==1.0.0b11 azure-ai-agents==1.1.0b2 aiohttp 
+
+# Run server (F)
+uv run -m azure_agent_mcp_server
+```

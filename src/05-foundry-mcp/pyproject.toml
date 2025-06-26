@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "azure-agent-mcp-server"
+version = "0.1.0"
+description = "Azure AI Agent Service MCP Server"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp[cli]==1.9.4",
+    "azure-identity==1.23.0",
+    "python-dotenv==1.1.0",
+    "azure-ai-projects==1.0.0b11",
+    "azure-ai-agents==1.1.0b2",
+    "aiohttp>=3.11.14",
+]
