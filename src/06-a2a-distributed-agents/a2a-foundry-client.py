@@ -17,10 +17,21 @@ from a2a.types import (AgentCard, CancelTaskRequest, CancelTaskResponse, Part,
                        SendStreamingMessageResponse, PushNotificationConfig, JSONRPCRequest, JSONRPCResponse,
                        SetTaskPushNotificationConfigRequest,
                        SetTaskPushNotificationConfigResponse)
+from a2a.types import (
+    AgentCard,
+    FilePart,
+    FileWithBytes,
+    FileWithUri,
+    Part,
+    TaskState,
+    TextPart,
+)
 from a2a.server.agent_execution import AgentExecutor, RequestContext
 from a2a.server.events import EventQueue
 from a2a.utils import new_agent_text_message
+from a2a.server.tasks import TaskUpdater
 from azure.identity import DefaultAzureCredential
+from a2a.utils.message import new_agent_text_message
 
 from pydantic import (
     BaseModel,

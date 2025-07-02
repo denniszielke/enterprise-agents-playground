@@ -82,5 +82,5 @@ The scope of this workshop covers the following scenarios and technology stacks:
 | [MCP Servers](./src/03-mcp-servers/README.mdy) | Model Context Protocol Servers| LangChain, FASTMCP |
 | [Connected Agents](./src/04-connected-agents/README.md) | Connected Agents | Foundry Agents |
 | [Agents as Tools](./src/05-agents-as-tools/README.md) | Agents via MCP | Foundry Agents, MCP |
-| [Reasoning Agents](./src/06-reasoning-agents/README.md) | Multi agents vs Reasoning Agents | Foundry Agents, Semantic Kernel |
+| [Distributed Agents](./src/06-a2a-distributed-agents/README.md) | Distributed Agent via A2A | Foundry Agents, Semantic Kernel, A2A |
 | [Agent Memory](./src/07-agent-memory/README.md) | Multiple agents sharing memory | Foundry Agents, Semantic Kernel, Mem0 |
