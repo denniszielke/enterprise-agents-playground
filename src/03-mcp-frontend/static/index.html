@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>A Minimal MCP Client</title>
+    <!-- Include Pico.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css" />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Import Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Use a modern sans-serif font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Main Container -->
+    <main class="container">
+        <article>
+            <h1>MCP Client</h1>
+            <h4>A minimal MCP client</h4>
+            <button id="startSession" class="black-button">Start Call to MCP Server</button>
+            <!-- Updated Form -->
+            <div id="statusMessage"></div>
+            <div id="logContainerSystem">
+                
+            </div>
+            <pre id="report"></pre>
+        </article>
+    </main>
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

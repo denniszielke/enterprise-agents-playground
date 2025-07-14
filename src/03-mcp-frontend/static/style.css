@@ -1,0 +1,137 @@
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    /* background-image: url('https://media.miele.com/images/2000018/200001823/20000182373.png'); */
+    background-image: url('');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+main.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+article {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+    color: #000;
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+h4 {
+    margin-bottom: 30px;
+    color: #000;
+    font-size: 0.5em;
+}
+
+#productList {
+    background-color: whitesmoke;
+    display:box;
+}
+
+.product {
+    padding: 10px;
+    background-color: whitesmoke;
+    width: 200px;
+    float:left;
+}
+
+.product h3 {
+    font-size: 0.7em;
+}
+
+.product img{
+    max-height: 100px;
+}
+
+.product p{
+    padding:5px;
+    font-size: 0.6em;
+    font-style: italic;
+}
+
+
+.black-button {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.black-button:hover {
+    background-color: #333 !important;
+}
+
+#toggleButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form input[type="text"],
+form button {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 10px;
+    display: block;
+}
+
+form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+}
+
+form button {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#statusMessage {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+#statusMessage:empty {
+    display: none;
+}
+
+#report {
+    margin-top: 30px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 600px;
+    margin: 0 auto;
+    display: none;
+}
+
+#report:not(:empty) {
+    display: block;
+}
