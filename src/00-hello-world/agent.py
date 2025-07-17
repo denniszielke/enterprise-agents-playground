@@ -6,6 +6,7 @@ import os, time
 from azure.ai.agents import AgentsClient
 from azure.identity import DefaultAzureCredential
 from azure.ai.agents.models import ListSortOrder
+from azure.ai.projects import AIProjectClient
 
 from dotenv import load_dotenv
 
@@ -29,8 +30,6 @@ agents_client = AgentsClient(
     credential=DefaultAzureCredential(),
 )
 
-from azure.ai.projects import AIProjectClient
-from azure.identity import DefaultAzureCredential
 project_client = AIProjectClient(            
         credential=DefaultAzureCredential(
             exclude_environment_credential=True,
