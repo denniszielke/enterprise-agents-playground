@@ -6,6 +6,16 @@ from azure.identity import DefaultAzureCredential
 from pathlib import Path
 from dotenv import load_dotenv
 from azure.ai.agents.models import ListSortOrder
+
+from azure.ai.agents.models import (
+    ListSortOrder,
+    McpTool,
+    RequiredMcpToolCall,
+    RunStepActivityDetails,
+    SubmitToolApprovalAction,
+    ToolApproval,
+)
+
 load_dotenv()
 
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
@@ -27,6 +37,25 @@ project_client = AIProjectClient(
         api_version="2025-05-15-preview"
     )
 
+# Initialize agent MCP tool
+data_time_mcp_tool = McpTool(
+    server_label="datetimespace_tools_mcp",
+    server_url=datetimespace_mcp_url,
+    allowed_tools=[],  # Optional: specify allowed tools
+)
+
+customer_mcp_tool = McpTool(
+    server_label="customer_data_mcp",
+    server_url=customers_mcp_url,
+    allowed_tools=[],  # Optional: specify allowed tools
+)
+
+joined_tool_definitions = data_time_mcp_tool.definitions #, customer_mcp_tool.definitions]
+
+# You can also add or remove allowed tools dynamically
+# search_api_code = "search_azure_rest_api_code"
+# data_time_mcp_tool.allow_tool(search_api_code)
+# print(f"Allowed tools: {mcp_tool.allowed_tools}")
 
 with project_client:
 
@@ -35,14 +64,7 @@ with project_client:
         model=model_deployment_name,
         name=f"{session_name}-mcp-agent",
         instructions="You are helpful agent. Only use the mcp tools you can use to answer the question. If you do not how to to answer a questions with the tools available, then say so and stop processing.",
-        tools= [
-            {
-                "type": "mcp",
-                "server_label": "customer_mcp_server",
-                "server_url": datetimespace_mcp_url,
-                "require_approval": "never"
-            }
-        ],
+        tools=joined_tool_definitions,
         tool_resources=None
     )
 
@@ -60,11 +82,41 @@ with project_client:
 
 
     # Poll the run as long as run status is queued or in progress
+
     while run.status in ["queued", "in_progress", "requires_action"]:
-        # Wait for a second
         time.sleep(1)
         run = project_client.agents.runs.get(thread_id=thread.id, run_id=run.id)
-        print(f"Run status: {run.status}")
+
+        if run.status == "requires_action" and isinstance(run.required_action, SubmitToolApprovalAction):
+            tool_calls = run.required_action.submit_tool_approval.tool_calls
+            if not tool_calls:
+                print("No tool calls provided - cancelling run")
+                project_client.agents.runs.cancel(thread_id=thread.id, run_id=run.id)
+                break
+
+            tool_approvals = []
+            for tool_call in tool_calls:
+                if isinstance(tool_call, RequiredMcpToolCall):
+                    try:
+                        print(f"Approving tool call: {tool_call}")
+                        tool_approvals.append(
+                            ToolApproval(
+                                tool_call_id=tool_call.id,
+                                approve=True,
+                                headers=data_time_mcp_tool.headers,
+                            )
+                        )
+                    except Exception as e:
+                        print(f"Error approving tool_call {tool_call.id}: {e}")
+
+            print(f"tool_approvals: {tool_approvals}")
+            if tool_approvals:
+                project_client.agents.runs.submit_tool_outputs(
+                    thread_id=thread.id, run_id=run.id, tool_approvals=tool_approvals
+                )
+
+        print(f"Current run status: {run.status}")
+
 
     if run.status == "failed":
         print(f"Run error: {run.last_error}")
