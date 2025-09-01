@@ -29,8 +29,6 @@ foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
 session_name = os.environ.get("SESSION_NAME", "default")
-subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID environment variable is set
-resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)

@@ -18,10 +18,10 @@ requests==2.32.3
 semantic-kernel==1.36.0
 streamlit==1.49.0
 fastmcp==2.11.3
-a2a-sdk==0.3.3
+# a2a-sdk==0.3.3
 httpx==0.28.1
-# opentelemetry-api==1.31.1
-# azure.monitor.opentelemetry==1.6.10
+opentelemetry-api==1.31.1
+azure.monitor.opentelemetry==1.6.10
 mem0ai==0.1.116
 azure-search-documents==11.5.3
 uv==0.7.20
