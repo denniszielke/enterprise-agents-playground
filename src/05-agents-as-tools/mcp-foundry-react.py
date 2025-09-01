@@ -3,42 +3,36 @@ from pathlib import Path
 import asyncio
 import dotenv
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
-from langchain_azure_ai.chat_models import AzureAIChatCompletionsModel
+from langchain_openai import AzureChatOpenAI
 from azure.ai.projects import AIProjectClient
 
 dotenv.load_dotenv()
 
-llm: AzureAIChatCompletionsModel = None
+llm: AzureChatOpenAI = None
 
+foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
 session_name = os.environ.get("SESSION_NAME", "default")
-subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID environment variable is set
-resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
-region = os.environ["REGION"]
-project_endpoint = os.environ["AGENT_PROJECT_ENDPOINT"]
-default_agent_id = os.getenv("DEFAULT_AGENT_ID")
+api_key = os.environ["API_KEY"]
+project_endpoint = os.environ["PROJECT_ENDPOINT"]
+default_agent_id = os.environ["DEFAULT_AGENT_ID"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-
-model_deployment_name = "gpt-4o"
 token_provider = get_bearer_token_provider(
     credential, "https://ai.azure.com/.default"
 )
 
-llm = AzureAIChatCompletionsModel(
+llm = AzureChatOpenAI(
     azure_ad_token_provider=token_provider,
-    endpoint=endpoint,
-    model=model_deployment_name,
-    temperature=0, 
-    openai_api_type="azure_ad",
-    credential=credential,
-    client_kwargs={"credential_scopes": [ "https://ai.azure.com/.default"]},
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    azure_deployment=model_deployment_name,
+    openai_api_version=os.getenv("AZURE_OPENAI_VERSION"),
+    temperature=0,
+    streaming=True
 )
-
-project_connection_string = f"{region}.api.azureml.ms;{subscription_id};{project_name}"
 
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
