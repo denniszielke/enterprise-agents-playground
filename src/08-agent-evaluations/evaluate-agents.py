@@ -28,8 +28,8 @@ from azure.ai.evaluation import AIAgentConverter
 # Initialize the converter that will be backed by the project.
 converter = AIAgentConverter(project_client)
 
-thread_id = "thread_DlcDXX2Ovf9qFOFUV5dCUhyS"  # Replace with your actual thread ID
-run_id = "run_wLT8SkjzO1jt8KUjq3OGFf8l"
+thread_id = "thread_e0JeFh86feR43PbOx5M2zwbd"  # Replace with your actual thread ID
+run_id = "run_sThjkQyTrIfbZyyc4kgkrBrA"
 file_name = "evaluation_data.jsonl"
 
 # Get a single agent run data

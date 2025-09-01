@@ -7,7 +7,7 @@ from langchain_core.messages import BaseMessage, SystemMessage
 from langchain import agents
 from langchain_core.prompts import PromptTemplate
 from langchain_core.tools import tool
-from langchain_azure_ai.chat_models import AzureAIChatCompletionsModel
+from langchain_openai import AzureChatOpenAI
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain_core.tools import tool
 from dotenv import load_dotenv
@@ -15,15 +15,14 @@ from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
 load_dotenv()
 
-llm: AzureAIChatCompletionsModel = None
+llm: AzureChatOpenAI = None
 
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
 session_name = os.environ.get("SESSION_NAME", "default")
-subscription_id = os.environ["SUBSCRIPTION_ID"]  # Ensure the SUBSCRIPTION_ID environment variable is set
-resource_group = os.environ["RESOURCE_GROUP"]  # Ensure the RESOURCE_GROUP environment variable is set
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
+api_key = os.environ["API_KEY"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
@@ -31,14 +30,13 @@ token_provider = get_bearer_token_provider(
     credential, "https://ai.azure.com/.default"
 )
 
-model = AzureAIChatCompletionsModel(
+model = AzureChatOpenAI(
     azure_ad_token_provider=token_provider,
-    endpoint=endpoint,
-    model=model_deployment_name,
-    temperature=0, 
-    openai_api_type="azure_ad",
-    credential=credential,
-    client_kwargs={"logging_enable": True, "credential_scopes": [ "https://ai.azure.com/.default"]},
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    azure_deployment=model_deployment_name,
+    openai_api_version=os.getenv("AZURE_OPENAI_VERSION"),
+    temperature=0,
+    streaming=True
 )
 
 def llm(x):
