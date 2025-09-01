@@ -5,7 +5,7 @@ from langchain_core.tools import tool
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 from langgraph.prebuilt import create_react_agent
 from langchain_core.tools import tool
-from langchain_azure_ai.chat_models import AzureAIChatCompletionsModel
+from langchain_openai import AzureChatOpenAI
 from azure.ai.projects import AIProjectClient
 from azure.ai.inference.tracing import AIInferenceInstrumentor
 from azure.monitor.opentelemetry import configure_azure_monitor
@@ -23,13 +23,14 @@ logger.addHandler(logging.StreamHandler(stream=sys.stdout))
 def get_logger(module_name):
     return logging.getLogger(f"app.{module_name}")
 
-llm: AzureAIChatCompletionsModel = None
+llm: AzureChatOpenAI = None
 
 foundry_name = os.environ["FOUNDRY_NAME"]  # Ensure the FOUNDRY_NAME environment variable is set    
 project_name = os.environ["PROJECT_NAME"]  # Ensure the PROJECT_NAME environment variable is set
 model_deployment_name = os.environ["MODEL_DEPLOYMENT_NAME"]  # Ensure the MODEL_DEPLOYMENT_NAME environment variable is set
 session_name = os.environ.get("SESSION_NAME", "default")
 endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
+api_key = os.environ["API_KEY"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
 
@@ -38,14 +39,14 @@ token_provider = get_bearer_token_provider(
     credential, "https://ai.azure.com/.default"
 )
 
-llm = AzureAIChatCompletionsModel(
+llm = AzureChatOpenAI(
     azure_ad_token_provider=token_provider,
-    endpoint=endpoint,
-    model=model_deployment_name,
-    temperature=0, 
-    openai_api_type="azure_ad",
-    credential=credential,
-    client_kwargs={"logging_enable": True, "credential_scopes": [ "https://ai.azure.com/.default"]},
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    azure_deployment=os.getenv("AZURE_OPENAI_COMPLETION_DEPLOYMENT_NAME"),
+    openai_api_version=os.getenv("AZURE_OPENAI_VERSION"),
+    temperature=0,
+    api_key=api_key,
+    streaming=True
 )
 
 AIInferenceInstrumentor().instrument()
@@ -58,7 +59,7 @@ project_client = AIProjectClient(
         endpoint=os.environ["PROJECT_ENDPOINT"],
     )
 
-application_insights_connection_string = project_client.telemetry.get_connection_string()
+connection_string = project_client.telemetry.get_application_insights_connection_string()
 tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.MachineLearningServices/workspaces/{project_name}"
 
 configure_azure_monitor(connection_string=application_insights_connection_string)

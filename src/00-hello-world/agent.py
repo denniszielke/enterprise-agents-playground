@@ -47,10 +47,6 @@ if not connection_string:
     print("Application Insights is not enabled. Enable by going to Tracing in your Azure AI Foundry project.")
     exit()
 
-
-tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.MachineLearningServices/workspaces/{project_name}"
-print(f"View traces at: {tracing_link}")
-
 configure_azure_monitor(connection_string=connection_string) #enable telemetry collection
 
 from opentelemetry import trace
@@ -98,8 +94,8 @@ with tracer.start_as_current_span(f"{session_name}-hello-tracing"):
         if run.status == "failed":
             print(f"Run error: {run.last_error}")
 
-        agents_client.delete_agent(agent.id)
-        print("Deleted agent")
+        # agents_client.delete_agent(agent.id)
+        # print("Deleted agent")
 
         # [START list_messages]
         messages = agents_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
