@@ -33,8 +33,6 @@ endpoint = f"https://{foundry_name}.services.ai.azure.com/models"
 api_key = os.environ["API_KEY"]
 
 credential = DefaultAzureCredential(exclude_interactive_browser_credential=False)
-
-model_deployment_name = "gpt-4o"
 token_provider = get_bearer_token_provider(
     credential, "https://ai.azure.com/.default"
 )
@@ -42,10 +40,9 @@ token_provider = get_bearer_token_provider(
 llm = AzureChatOpenAI(
     azure_ad_token_provider=token_provider,
     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-    azure_deployment=os.getenv("AZURE_OPENAI_COMPLETION_DEPLOYMENT_NAME"),
+    azure_deployment=model_deployment_name,
     openai_api_version=os.getenv("AZURE_OPENAI_VERSION"),
     temperature=0,
-    api_key=api_key,
     streaming=True
 )
 
@@ -60,11 +57,6 @@ project_client = AIProjectClient(
     )
 
 connection_string = project_client.telemetry.get_application_insights_connection_string()
-tracing_link = f"https://ai.azure.com/tracing?wsid=/subscriptions/{subscription_id}/resourceGroups/{resource_group}/providers/Microsoft.MachineLearningServices/workspaces/{project_name}"
-
-configure_azure_monitor(connection_string=application_insights_connection_string)
-logger.info("Enabled telemetry logging to project, view traces at:")
-logger.info(tracing_link)
 
 @tool
 def get_current_username(input: str) -> str:
