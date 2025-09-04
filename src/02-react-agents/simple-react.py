@@ -56,7 +56,7 @@ project_client = AIProjectClient(
         endpoint=os.environ["PROJECT_ENDPOINT"],
     )
 
-connection_string = project_client.telemetry.get_application_insights_connection_string()
+connection_string = project_client.telemetry.get_connection_string()
 
 @tool
 def get_current_username(input: str) -> str:

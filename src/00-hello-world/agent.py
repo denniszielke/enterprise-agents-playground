@@ -41,7 +41,7 @@ project_client = AIProjectClient(
     )
 
 from azure.monitor.opentelemetry import configure_azure_monitor
-connection_string = project_client.telemetry.get_application_insights_connection_string()
+connection_string = project_client.telemetry.get_connection_string()
 
 if not connection_string:
     print("Application Insights is not enabled. Enable by going to Tracing in your Azure AI Foundry project.")
